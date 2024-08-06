@@ -2,8 +2,8 @@
  * @Author: JAR_CHOW
  * @Date: 2024-07-12 20:37:32
  * @LastEditors: JAR_CHOW
- * @LastEditTime: 2024-08-02 11:32:07
- * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\M0G3507spmr\M0G3507spmr\APP\main.c
+ * @LastEditTime: 2024-08-04 19:33:35
+ * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\24_H\M0G3507spmr\M0G3507spmr\APP\main.c
  * @Description:
  *
  * Copyright (c) 2024 by jar_chou@qq.com, All Rights Reserved.
@@ -171,19 +171,16 @@ int main(void)
 		case KEY_2_DOWN:
 			UI_prev();
 			break;
-
 		default:
 			break;
 		}
 
-		
 		// turn off the led after 1s
 		if (!(led_state && (--led_state)))
 		{
 			LED_OFF();
 		}
 
-		
 		// DrawNum(7, 0, not_on_drak_line_flag, 1);
 		// DrawNum(7, 8, on_drak_line_flag, 1);
 

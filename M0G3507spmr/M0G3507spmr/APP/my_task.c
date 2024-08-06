@@ -2,8 +2,8 @@
  * @Author: JAR_CHOW
  * @Date: 2024-07-29 09:11:43
  * @LastEditors: JAR_CHOW
- * @LastEditTime: 2024-08-02 11:57:13
- * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\M0G3507spmr\M0G3507spmr\APP\my_task.c
+ * @LastEditTime: 2024-08-03 16:47:18
+ * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\24_H\M0G3507spmr\M0G3507spmr\APP\my_task.c
  * @Description: the task of the car, all the task is programmed by state machine. if you have any question, it is welcome to contact me by email.
  *
  * Copyright (c) 2024 by jar_chou@qq.com, All Rights Reserved.
@@ -17,6 +17,8 @@
 #include <stdint.h>
 
 #define ANGULAR_VELOCITY_VERSION
+
+uint8_t Waiting_Out_Black_Line_Time = 13;
 
 static int32_t CCR[4] = {0};
 
@@ -285,7 +287,7 @@ void task2(void)
 		}
 		break;
 	case 2:					 // 出弯
-		if (count_time < 13) // filter dirty data
+		if (count_time < Waiting_Out_Black_Line_Time) // filter dirty data
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;
@@ -399,7 +401,7 @@ void task2(void)
 		}
 		break;
 	case 7: // judge whether the car is on the end of the black line,if not, return to the previous case, otherwise, stop this task
-		if ((count_time) < 13)
+		if ((count_time) < Waiting_Out_Black_Line_Time)
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;
@@ -546,7 +548,7 @@ void task3(void)
 		}
 		break;
 	case 4:	// judge whether the car is on the end of the black line,if not, return to the previous case, otherwise, enter the next case
-		if ((count_time) < 13)
+		if ((count_time) < Waiting_Out_Black_Line_Time)
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;
@@ -666,7 +668,7 @@ void task3(void)
 		}
 		break;
 	case 9:	// judge whether the car is on the end of the black line,if not, return to the previous case, otherwise, stop this task
-		if ((count_time) < 13)
+		if ((count_time) < Waiting_Out_Black_Line_Time)
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;
@@ -823,7 +825,7 @@ void task4(void)
 		}
 		break;
 	case 4:	// judge whether the car is on the end of the black line,if not, return to the previous case, otherwise, enter the next case
-		if ((count_time) < 13)
+		if ((count_time) < Waiting_Out_Black_Line_Time)
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;
@@ -945,7 +947,7 @@ void task4(void)
 		}
 		break;
 	case 9:	// judge whether the car is on the end of the black line,if not, return to the previous case, otherwise, start the 8-shape task again
-		if ((count_time) < 13)
+		if ((count_time) < Waiting_Out_Black_Line_Time)
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;
@@ -1101,7 +1103,7 @@ void task5(void)
 		}
 		break;
 	case 4:
-		if ((count_time) < 13)
+		if ((count_time) < Waiting_Out_Black_Line_Time)
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;
@@ -1223,7 +1225,7 @@ void task5(void)
 		}
 		break;
 	case 9:
-		if ((count_time) < 13)
+		if ((count_time) < Waiting_Out_Black_Line_Time)
 		{
 			if (not_on_drak_line_flag)
 				last_count_time++;

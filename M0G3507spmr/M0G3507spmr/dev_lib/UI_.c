@@ -2,8 +2,8 @@
  * @Author: JAR_CHOW
  * @Date: 2024-05-06 18:52:10
  * @LastEditors: JAR_CHOW
- * @LastEditTime: 2024-08-02 10:58:59
- * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\M0G3507spmr\M0G3507spmr\dev_lib\UI_.c
+ * @LastEditTime: 2024-08-03 23:05:57
+ * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\24_H\M0G3507spmr\M0G3507spmr\dev_lib\UI_.c
  * @Description:
  *
  * Copyright (c) 2024 by jar_chou@qq.com, All Rights Reserved.
@@ -152,10 +152,12 @@ void UI_updata(void)
 struct Page_UI_t page1;
 struct Page_UI_t page2;
 struct Page_UI_t page3;
+struct Page_UI_t page4;
 
 #include "my_task.h"
 #include "APP_include.h"
 #include "DEV_Grayscale.h"
+#include <stdio.h>
 
 void task_one_init(void)
 {
@@ -227,14 +229,30 @@ void angle_tuning_init(void)
 	task = turn_angle_tuning;
 }
 
+void add_time(void)
+{
+	Waiting_Out_Black_Line_Time++;
+	static char str[20];
+	sprintf(str, "time:%d  ", Waiting_Out_Black_Line_Time);
+	DrawString(3, 0, str);
+}
+
+void minus_time(void)
+{
+	Waiting_Out_Black_Line_Time--;
+	static char str[20];
+	sprintf(str, "time:%d  ", Waiting_Out_Black_Line_Time);
+	DrawString(3, 0, str);
+}
+
 void test1(void)
 {
 	// 3 pages
 	// first page
 	page1.name = "page1";
 	page1.last_page = NULL;
-	page1.item_num = 2;
-	page1.item_list = (struct Item_UI_t *)malloc(sizeof(struct Item_UI_t) * 2);
+	page1.item_num = 3;
+	page1.item_list = (struct Item_UI_t *)malloc(sizeof(struct Item_UI_t) * 3);
 
 	page1.item_list[0].name = "choose_task";
 	page1.item_list[0].func = NULL;
@@ -245,8 +263,14 @@ void test1(void)
 	page1.item_list[1].name = "PID_TUNING";
 	page1.item_list[1].func = NULL;
 	page1.item_list[1].next_page = &page3;
-	page1.item_list[1].next = NULL;
+	page1.item_list[1].next = &page1.item_list[2];
 	page1.item_list[1].prev = &page1.item_list[0];
+
+	page1.item_list[2].name = "time out tuning";
+	page1.item_list[2].func = NULL;
+	page1.item_list[2].next_page = &page4;
+	page1.item_list[2].next = NULL;
+	page1.item_list[2].prev = &page1.item_list[1];
 
 	// second page
 	page2.name = "page2";
@@ -295,6 +319,25 @@ void test1(void)
 	page3.item_list[1].next_page = NULL;
 	page3.item_list[1].next = NULL;
 	page3.item_list[1].prev = &page3.item_list[0];
+
+	// fourth page
+	page4.name = "page4";
+	page4.last_page = &page1;
+	page4.item_num = 2;
+	page4.item_list = (struct Item_UI_t *)malloc(sizeof(struct Item_UI_t) * 2);
+
+	page4.item_list[0].name = "add_time";
+	page4.item_list[0].func = add_time;
+	page4.item_list[0].next_page = NULL;
+	page4.item_list[0].next = &page4.item_list[1];
+	page4.item_list[0].prev = NULL;
+
+	page4.item_list[1].name = "minus_time";
+	page4.item_list[1].func = minus_time;
+	page4.item_list[1].next_page = NULL;
+	page4.item_list[1].next = NULL;
+	page4.item_list[1].prev = &page4.item_list[0];
+
 
 	current_page = &page1;
 	current_item = &page1.item_list[0];

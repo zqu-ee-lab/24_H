@@ -2,8 +2,8 @@
  * @Author: JAR_CHOW
  * @Date: 2024-07-29 15:36:20
  * @LastEditors: JAR_CHOW
- * @LastEditTime: 2024-08-01 17:01:14
- * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\M0G3507spmr\M0G3507spmr\APP\APP_include.h
+ * @LastEditTime: 2024-08-03 22:55:31
+ * @FilePath: \keilc:\Users\mrchow\Desktop\vscode_repo\24_H\M0G3507spmr\M0G3507spmr\APP\APP_include.h
  * @Description:
  *
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
@@ -21,6 +21,7 @@ extern volatile int gray_value;
 extern volatile uint8_t state;
 extern volatile struct angle Angle; // the angle of the car
 extern void (*task)(void);
+extern uint8_t Waiting_Out_Black_Line_Time;
 
 void init_task(void);
 
